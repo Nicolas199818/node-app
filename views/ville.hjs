@@ -7,7 +7,6 @@
   </head>
   <body>
     <p>{{ville}}</p>
-    <p>Ca me casse les couilles</p>
     <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCJtwkKeBNEVMYJ7fqUR2In-ihC148c9ZA&q=Eiffel+Tower,Paris+France">
 
     </iframe>
