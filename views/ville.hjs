@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta http-equiv="Content-Security-Policy" content="child-src 'https://www.openstreetmap.org/?mlat=48.8606&mlon=2.3404#map=12/48.8606/2.3403&layers=ND';">
     <title>Ville</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <p>{{ville}}</p>
+    <p>Ca me casse les couilles</p>
+    <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCJtwkKeBNEVMYJ7fqUR2In-ihC148c9ZA&q=Eiffel+Tower,Paris+France">
+
+    </iframe>
   </body>
 </html>
