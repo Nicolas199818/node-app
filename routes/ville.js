@@ -1,26 +1,31 @@
+const axios = require('axios');
 var express = require('express');
-var axios = require('axios');
 var router = express.Router();
-
-/* GET Ville page */
+const geoKey = "743155780783642724266x1971";
+/* POST ville page. */
 router.post('/', function(req, res, next) {
 
-  //Ici on veut lancer une autre requête vers la map. Le but est de récupérer les informations
-  axios.get('https://geocode.xyz/'+req.body.nom_ville+'?json=1&auth=889202541745294745990x1974').then(function (response) {
-    if(response.data.latt=="0.00000" && response.data.longt=="0.00000"){
-      res.render('ville',{ville:response.data.error.description})
+
+  const url = `https://geocode.xyz/${req.body.nom_ville}?json=1&auth=${geoKey}`;
+  const getData = async url => {
+  try {
+    const response = await axios.get(url);
+    const data = response.data;
+    if(data.error){
+      res.render('ville', { erreur: "Erreur : "+data.error.description});
+    } else{
+        console.log(data.standard.city);
+        console.log(data.longt);
+        console.log(data.latt);
+
+        res.render('ville', { nom_ville: "Ville : "+data.standard.city, longitude: "longitude : "+data.longt, lattitude: "lattitude : "+data.latt, lattitudeMaps: data.latt, longitudeMaps: data.longt});
     }
-    else{
-      console.log(req.body.nom_ville)
-      res.render('ville',{ville:'ville : '+response.data.standard.city+' latitude : '+response.data.latt + 'longitude'+response.data.longt});
-    }
-  })
-  .catch(function (error) {
+  } catch (error) {
     console.log(error);
-  });
 
-
+    }
+  };
+  getData(url);
 });
-
 
 module.exports = router;
